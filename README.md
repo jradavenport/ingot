@@ -1,7 +1,7 @@
 # ingot
 *Estimating stellar [Fe/H] using Wise + Gaia data alone*
 
-!()[ingot.png]
+![](ingot.png)
 
 ## Acknowledgements
 KNN model guidance from @jakevdp. Original idea generated with @sjschmidt.
