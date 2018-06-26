@@ -50,7 +50,7 @@ def FeH(w1w2, GJ, MG, use_MG = False):
                          df[u'M_G'].values]).T
         Xdata_input = np.array([w1w2, GJ, MG]).T
     else:
-        Index([u'FE_H', u'Jmag', u'M_G', u'phot_g_mean_mag', u'w1', u'w2'], dtype='object')
+        # Index([u'FE_H', u'Jmag', u'M_G', u'phot_g_mean_mag', u'w1', u'w2'], dtype='object')
         Xdata = np.array([df['w1'].values - df[u'w2'].values,
                          df[u'phot_g_mean_mag'].values - df[u'Jmag'].values]).T
         Xdata_input = np.array([w1w2, GJ]).T
