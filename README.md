@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/136649413.svg)](https://zenodo.org/badge/latestdoi/136649413)
+
 # ingot
 *Stellar [Fe/H] using Wise + Gaia data*
 
