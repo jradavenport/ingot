@@ -18,9 +18,6 @@
 
 \title{Photometric Metallicities for Low-Mass Stars\\ with Gaia and WISE}
 
-%% Note that the corresponding author command and emails has to come
-%% before everything else. Also place all the emails in the \email
-%% command instead of using multiple \email calls.
 \correspondingauthor{James. R. A. Davenport}
 \email{jrad@uw.edu}
 
@@ -35,12 +32,9 @@
 %%%%%%%
 \section{} 
 
+Multi-object spectroscopic surveys --- e.g., the Apache Point Observatory Galactic Evolution Experiment (APOGEE, \citealt{majewski17}) --- have increased the sample of stars with well-measured metallicities by orders of magnitude, but still don't reach brightness limits or sample sizes comparable with photometric surveys. 
+While less precise than spectroscopic measurements, "photometric metallicities" from visible and infrared surveys can explore the large scale chemical structure and evolution of our Galaxy \citep[e.g.][]{ivezic08,schmidt16}, though their use has so far been largely limited to legacy survey footprints.
 
-%Constraining metallicities of main sequence stars across the sky are key to understanding the chemo-dynamical assembly of our Galaxy. 
-%Measurements of chemical abundances traditionally require time-intensive spectroscopic observations, often only for individual and bright objects. 
-Multi-object spectroscopic surveys --- e.g., the Apache Point Observatory Galactic Evolution Experiment (APOGEE, \citealt{majewski17}) --- have increased the sample of stars with well-measured metallicities by orders of magnitude, but still don't reach brightness limits or sample sizes comparable with photometric surveys. While less precise than spectroscopic measurements, ``photometric metallicities'' from visible and infrared surveys can explore the large scale chemical structure and evolution of our Galaxy \citep[e.g.][]{ivezic08,schmidt16}, though have been largely limited to legacy survey footprints.
-%Visible and infrared photometric surveys allow us to develop empirical relations between colors and \feh.
-%\citet{ivezic08} developed photometric metallicities using Sloan Digital Sky Survey \citet[SDSS,][]{york00} for 2 million F/G stars. Similarly, \citet{schmidt16} used APOGEE data to derive temperature and metallicity with SDSS and WISE \citep{wise} colors for nearly 4000 K and M dwarfs. However, both studies were naturally limited to the SDSS photometric footprint.
 
 Thanks to the Gaia mission \citep{gaia_dr2}, photometric metallicities are now possible for field stars across the entire sky. Here we present \ingot, a {\it k}--nearest neighbors (KNN) tool to estimate stellar \feh using Gaia and WISE photometry for low-mass stars. We demonstrate this capability by estimating metallicities for three million cool stars, and advocate for more detailed explorations of this technique using WISE and Gaia data.
 
@@ -64,29 +58,6 @@ To represent our data with a flexible model, we used {\tt scikit-learn}'s {\it k
 We applied \ingot to 3.8 million new low-mass stars selected from Gaia and WISE photometry for stars within the color--color box defined in Figure \ref{fig:1}, reaching $\sim$600 pc over the entire sky. The mean \feh for these sources projected into the ($R_{xy}, Z$) plane is shown in Figure \ref{fig:1}. The metal-rich disk of the Milky Way, including the decreasing scale-height with increasing radius, is clearly recovered.
 
 
-% - original training sample:
-% Aok = np.where((Adata[u'FE_H'] > -6))
-% Bok = np.where((M_GA >= 3) & 
-%               np.isfinite(Adata[u'a_g_val'].values[Aok]) & 
-%               (Adata[u'a_g_val'].values[Aok] < 0.5))
-
-
-
-% - ADQL:
-% SELECT TOP 90000000 gaia.ra, gaia.dec, gaia.parallax, gaia.parallax_error, gaia.a_g_val, gaia.phot_g_mean_mag, gaia.phot_g_mean_flux, gaia.phot_g_mean_flux_error, wise.w1mpro, wise.w1mpro_error, wise.w2mpro, wise.w2mpro_error, tmass.j_m, tmass.j_msigcom FROM gaiadr2.gaia_source as gaia JOIN gaiadr2.allwise_best_neighbour as wise_match ON gaia.source_id = wise_match.source_id JOIN gaiadr1.allwise_original_valid as wise ON wise_match.allwise_oid=wise.allwise_oid JOIN gaiadr2.tmass_best_neighbour as tmass_match ON gaia.source_id = tmass_match.source_id JOIN gaiadr1.tmass_original_valid as tmass ON tmass_match.tmass_oid = tmass.tmass_oid WHERE wise.w2mpro_error < 0.05 AND wise.w1mpro_error < 0.05 AND wise.w2mpro < 14 AND gaia.a_g_val < 0.5 AND gaia.parallax_error/gaia.parallax < 0.1 AND gaia.phot_g_mean_mag + 5*log10(gaia.parallax) - 10 > 4
-
-
-% - data cuts:
-% best = np.where((df['phot_g_mean_mag']-df['j_m'] > 0.5) & 
-%                 (df['phot_g_mean_mag']-df['j_m'] < 3) & 
-%                 (df['w1mpro']-df['w2mpro'] > -0.13) & 
-%                 (df['w1mpro']-df['w2mpro'] < 0.2) & 
-%                 (M_G < 11.5) & 
-%                 (df['w1mpro_error'] < 0.03) & 
-%                 (df['j_msigcom'] < 0.03) & 
-%                 (df['parallax_error'] / df['parallax'] < 0.02))
-
-
 \ingot is publicly available\footnote{https://github.com/jradavenport/ingot}, including the data required to recreate our training sample. We consider \ingot a demonstration of the  potential for simple machine learning tools combined with multi-wavelength data from wide-field surveys to advance galactic chemical cartography. For example, the catalog of over 2 billion point sources from the unWISE project \citep{schlafly2019}, matched to Gaia DR2, is an ideal dataset for such analysis.
 
 
@@ -95,9 +66,6 @@ We applied \ingot to 3.8 million new low-mass stars selected from Gaia and WISE 
 %%%%%%%%%
 \acknowledgments
 
-%The DIRAC Institute is supported through generous gifts from the Charles and Lisa Simonyi Fund for Arts and Sciences, and the Washington Research Foundation
-
-% https://gea.esac.esa.int/archive/documentation/credits.html
 This work has made use of data from the European Space Agency (ESA) mission
 {\it Gaia} (\url{https://www.cosmos.esa.int/gaia}), processed by the {\it Gaia}
 Data Processing and Analysis Consortium (DPAC,
